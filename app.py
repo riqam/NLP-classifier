@@ -16,6 +16,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Load the best model from the .pkl file
 best_model = joblib.load('best_model.pkl')
+
 nltk.download('punkt')  # Download the punkt tokenizer
 nltk.download('stopwords')  # Download the NLTK stop words
 stop_words = set(stopwords.words('english'))
@@ -31,7 +32,7 @@ def classify_text(text):
     tokens = word_tokenize(text)
     processed_tokens = process_tokens(tokens)
     tfidf_vectorizer = TfidfVectorizer()
-    text_vectorized = tfidf_vectorizer.transform([' '.join(processed_tokens)])
+    text_vectorized = tfidf_vectorizer.fit_transform([' '.join(processed_tokens)])
     prediction = best_model.predict(text_vectorized)
     return prediction[0]
 
@@ -49,7 +50,7 @@ def main():
 
     # Menghapus baris pertama
     test_df = test_df.drop(0, axis=0)
-    
+
     test_df['text'] = test_df['city'] + " " + test_df['section'] + " " + test_df['heading']
     del test_df['city']
     del test_df['section']
