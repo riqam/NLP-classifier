@@ -50,9 +50,15 @@ def main():
     # Menghapus baris pertama
     test_df = test_df.drop(0, axis=0)
 
-    # Display test data
-    st.subheader('Test Data:')
-    st.write(test_df)
+    # Allow user to select a row for prediction
+    selected_row = st.selectbox('Select a row for prediction:', test_df['text'])
+
+    # Classify the selected text
+    prediction = classify_text(selected_row)
+
+    # Display prediction
+    st.subheader('Prediction:')
+    st.write({'text': selected_row, 'category': prediction})
 
     # Classify each text in the test data
     predictions = []
