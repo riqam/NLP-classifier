@@ -27,6 +27,8 @@ def process_tokens(tokens):
     processed_tokens = list(filter(None, processed_tokens))
     return processed_tokens
 
+'''
+
 # Function to classify a text using the best model
 def classify_text(text):
     tokens = word_tokenize(text)
@@ -34,7 +36,7 @@ def classify_text(text):
     tfidf_vectorizer = TfidfVectorizer()
     text_vectorized = tfidf_vectorizer.fit_transform([' '.join(processed_tokens)])
     prediction = best_model.predict(text_vectorized)
-    return prediction[0]
+    return prediction[0]'''
 
 # Streamlit App
 def main():
@@ -48,23 +50,28 @@ def main():
     # Membuat DataFrame dari data yang sudah dipecah
     test_df = pd.json_normalize(data)
 
-    # Menghapus baris pertama
-    test_df = test_df.drop(0, axis=0)
-
     test_df['text'] = test_df['city'] + " " + test_df['section'] + " " + test_df['heading']
     del test_df['city']
     del test_df['section']
     del test_df['heading']
+
+    # Menghapus baris pertama
+    test_df = test_df.drop(0, axis=0)
+
+    test_df['tokens'] = test_df['text'].apply(lambda x: process_tokens(word_tokenize(x)))
+
+    # Feature Extraction
+    tfidf_vectorizer = TfidfVectorizer()
+    text_vectorized = tfidf_vectorizer.fit_transform(test_df['tokens'].apply(lambda x: ' '.join(x)))
 
     # Display test data
     st.subheader('Test Data:')
 
     # Allow user to select a row for prediction
     selected_row = st.selectbox('Select a row for prediction:', test_df['text'])
-
-    # Classify the selected text
-    prediction = classify_text(selected_row)
-
+    
+    prediction = best_model.predict(text_vectorized)
+    
     # Display prediction
     st.subheader('Prediction:')
     st.write({'text': selected_row, 'category': prediction})
