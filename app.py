@@ -49,6 +49,11 @@ def main():
 
     # Menghapus baris pertama
     test_df = test_df.drop(0, axis=0)
+    
+    test_df['text'] = test_df['city'] + " " + test_df['section'] + " " + test_df['heading']
+    del test_df['city']
+    del test_df['section']
+    del test_df['heading']
 
     # Display test data
     st.subheader('Test Data:')
