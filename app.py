@@ -56,8 +56,9 @@ def main():
     st.subheader('Prediction:')
 
     # Menampilkan hasil prediksi berdasarkan teks yang dipilih
-    result_df = pd.DataFrame({'Predicted_Category': prediction})
-    st.table(result_df[result_df.index == test_df[test_df['text'] == selected_row].index[0]])
+    selected_index = test_df[test_df['text'] == selected_row].index[0]
+    result_df = pd.DataFrame({'Predicted_Category': prediction[selected_index]})
+    st.table(result_df)
 
 if __name__ == '__main__':
     main()
