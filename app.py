@@ -10,7 +10,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import re
 import pandas as pd
-from scipy.sparse import hstack
+import sklearn
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
