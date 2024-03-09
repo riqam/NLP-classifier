@@ -6,7 +6,6 @@ import joblib
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import re
-import sklearn
 
 # Load the best model from the .pkl file
 best_model = joblib.load('best_model.pkl')
@@ -56,14 +55,9 @@ def main():
     # Display prediction
     st.subheader('Prediction:')
 
-    def display_text_and_prediction(text, prediction):
-        result_df = pd.DataFrame({'Text': [text], 'Predicted_Category': [prediction]})
-        st.table(result_df[['Text', 'Predicted_Category']])
-
-    text_for_prediction = selected_row
-    
-    # Displaying text and prediction
-    display_text_and_prediction(text_for_prediction, prediction[0])
+    # Menampilkan hasil prediksi berdasarkan teks yang dipilih
+    result_df = pd.DataFrame({'Predicted_Category': prediction})
+    st.table(result_df[result_df.index[0] == test_df[test_df['text'] == selected_row].index[0]])
 
 if __name__ == '__main__':
     main()
