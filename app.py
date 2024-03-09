@@ -57,7 +57,16 @@ def main():
     
     # Display prediction
     st.subheader('Prediction:')
-    st.write({'text': selected_row, 'category': prediction[0]})
+    st.write({'text': selected_row, 'category': prediction})
+
+    def display_text_and_predictions(texts, predictions):
+        result_df = pd.DataFrame({'Text': texts, 'Predicted_Category': predictions})
+        print(result_df)
+
+    texts_for_prediction = selected_row
+    
+    # Displaying text and predictions
+    display_text_and_predictions(texts_for_prediction, prediction)
 
 if __name__ == '__main__':
     main()
