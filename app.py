@@ -27,17 +27,6 @@ def process_tokens(tokens):
     processed_tokens = list(filter(None, processed_tokens))
     return processed_tokens
 
-'''
-
-# Function to classify a text using the best model
-def classify_text(text):
-    tokens = word_tokenize(text)
-    processed_tokens = process_tokens(tokens)
-    tfidf_vectorizer = TfidfVectorizer()
-    text_vectorized = tfidf_vectorizer.transform([' '.join(processed_tokens)])
-    prediction = best_model.predict(text_vectorized)
-    return prediction[0]'''
-
 # Streamlit App
 def main():
     st.title('Text Classification App')
