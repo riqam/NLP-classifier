@@ -38,7 +38,7 @@ def main():
     del test_df['heading']
 
     # Menghapus baris pertama
-    test_df = test_df.drop(0, axis=0)
+    #test_df = test_df.drop(0, axis=0)
 
     test_df['tokens'] = test_df['text'].apply(lambda x: process_tokens(word_tokenize(x)))
 
