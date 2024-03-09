@@ -53,11 +53,11 @@ def main():
     # Allow user to select a row for prediction
     selected_row = st.selectbox('Select a row for prediction:', test_df['text'])
     
-    prediction = best_model.predict_proba(text_vectorized)
+    prediction = best_model.predict(text_vectorized)
     
     # Display prediction
     st.subheader('Prediction:')
-    st.write({'text': selected_row, 'category': prediction})
+    st.write({'text': selected_row, 'category': prediction[0]})
 
 if __name__ == '__main__':
     main()
