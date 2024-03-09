@@ -50,14 +50,18 @@ def main():
     # Allow user to select a row for prediction
     selected_row = st.selectbox('Select a row for prediction:', test_df['text'])
     
-    prediction = best_model.predict(text_vectorized)
-    
+    # Get the index of the selected row
+    selected_index = test_df[test_df['text'] == selected_row].index[0]
+
+    # Perform prediction only for the selected row
+    selected_prediction = best_model.predict(text_vectorized[selected_index])
+
     # Display prediction
     st.subheader('Prediction:')
 
     # Menampilkan hasil prediksi berdasarkan teks yang dipilih
-    result_df = pd.DataFrame({'Predicted_Category': prediction})
-    st.table(result_df[result_df.index == test_df[test_df['text'] == selected_row].index[1]])
+    result_df = pd.DataFrame({'Predicted_Category': selected_prediction})
+    st.table(result_df)
 
 if __name__ == '__main__':
     main()
