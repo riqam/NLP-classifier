@@ -38,8 +38,9 @@ def main():
     del test_df['heading']
 
     # Menghapus baris pertama
-    #test_df = test_df.drop(0, axis=0)
-
+    test_df = test_df.drop(0, axis=0)
+    test_df = test_df.reset_index(drop=True)
+    
     test_df['tokens'] = test_df['text'].apply(lambda x: process_tokens(word_tokenize(x)))
 
     text_vectorized = joblib.load('tfidf_vectorizer.pkl').transform(test_df['tokens'].apply(lambda x: ' '.join(x)))
