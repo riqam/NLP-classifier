@@ -63,7 +63,7 @@ def main():
         st.subheader('Text Category Prediction:')
 
         # Menampilkan hasil prediksi berdasarkan teks yang dipilih
-        result_df = pd.DataFrame({'Predicted_Category': selected_prediction})
+        result_df = pd.DataFrame({'Predicted Category': selected_prediction})
         st.table(result_df)
 
 if __name__ == '__main__':
