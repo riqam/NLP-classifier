@@ -34,7 +34,7 @@ def classify_text(text):
     tokens = word_tokenize(text)
     processed_tokens = process_tokens(tokens)
     tfidf_vectorizer = TfidfVectorizer()
-    text_vectorized = tfidf_vectorizer.fit_transform([' '.join(processed_tokens)])
+    text_vectorized = tfidf_vectorizer.transform([' '.join(processed_tokens)])
     prediction = best_model.predict(text_vectorized)
     return prediction[0]'''
 
@@ -62,7 +62,7 @@ def main():
 
     # Feature Extraction
     tfidf_vectorizer = TfidfVectorizer()
-    text_vectorized = tfidf_vectorizer.fit_transform(test_df['tokens'].apply(lambda x: ' '.join(x)))
+    text_vectorized = tfidf_vectorizer.transform(test_df['tokens'].apply(lambda x: ' '.join(x)))
 
     # Display test data
     st.subheader('Test Data:')
