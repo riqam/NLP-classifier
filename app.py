@@ -1,17 +1,13 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import nltk
 import json
 import joblib
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import re
-import pandas as pd
 import sklearn
-from sklearn.feature_extraction.text import TfidfVectorizer
+
 
 
 # Load the best model from the .pkl file
@@ -49,10 +45,8 @@ def main():
 
     test_df['tokens'] = test_df['text'].apply(lambda x: process_tokens(word_tokenize(x)))
 
-    # Feature Extraction
-    tfidf_vectorizer = TfidfVectorizer()
-    text_vectorized = tfidf_vectorizer.transform(test_df['tokens'].apply(lambda x: ' '.join(x)))
-
+    text_vectorized = joblib.load('tfidf_vectorizer.pkl').transform(test_df['tokens'].apply(lambda x: ' '.join(x)))
+    
     # Display test data
     st.subheader('Test Data:')
 
